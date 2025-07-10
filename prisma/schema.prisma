@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(cuid())
+  name           String?
+  email          String    @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // User roles
+  isAdmin Boolean @default(false)
+
+  // Relations
+  accounts       Account[]
+  listings       Listing[]       @relation("UserListings")
+  bookings       Booking[]       @relation("UserBookings")
+  rentals        Booking[]       @relation("ListingOwner")
+  sentMessages   Message[]       @relation("SentMessages")
+  receivedMessages Message[]     @relation("ReceivedMessages")
+  reviews        Review[]        @relation("UserReviews")
+  receivedReviews Review[]       @relation("ReceivedReviews")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  slug     String    @unique
+  image    String?
+  listings Listing[]
+}
+
+model Listing {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  price       Decimal  @db.Decimal(10, 2)
+  images      String[]
+  ownerId     String
+  categoryId  String
+  location    String?
+  latitude    Float?
+  longitude   Float?
+  isAvailable Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  owner     User      @relation("UserListings", fields: [ownerId], references: [id], onDelete: Cascade)
+  category  Category  @relation(fields: [categoryId], references: [id])
+  bookings  Booking[]
+  reviews   Review[]
+}
+
+model Booking {
+  id         String   @id @default(cuid())
+  listingId  String
+  renterId   String
+  ownerId    String   // Reference to listing owner
+  startDate  DateTime
+  endDate    DateTime
+  totalPrice Decimal  @db.Decimal(10, 2)
+  status     String   @default("pending") // pending, confirmed, active, completed, cancelled
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  listing     Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  renter      User     @relation("UserBookings", fields: [renterId], references: [id], onDelete: Cascade)
+  listingOwner User    @relation("ListingOwner", fields: [ownerId], references: [id])
+}
+
+model Message {
+  id         String   @id @default(cuid())
+  content    String
+  senderId   String
+  receiverId String
+  read       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  // Relations
+  sender    User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver  User     @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String?
+  listingId String
+  reviewerId String
+  reviewedId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  listing  Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  reviewer User     @relation("UserReviews", fields: [reviewerId], references: [id], onDelete: Cascade)
+  reviewed User     @relation("ReceivedReviews", fields: [reviewedId], references: [id], onDelete: Cascade)
+} 
