@@ -12,25 +12,26 @@ export const metadata = {
 };
 
 type ListingsPageProps = {
-  searchParams: {
+  searchParams: Promise<{
     category?: string;
     location?: string;
     minPrice?: string;
     maxPrice?: string;
     sortBy?: string;
-  };
+  }>;
 };
 
 export default async function ListingsPage({
   searchParams,
 }: ListingsPageProps) {
+  const params = await searchParams;
   const {
     category,
     location,
     minPrice,
     maxPrice,
     sortBy = "createdAt_desc",
-  } = searchParams;
+  } = params;
 
   // Build filter conditions
   const filters: any = {};
@@ -71,7 +72,7 @@ export default async function ListingsPage({
         <div className="lg:col-span-1">
           <ListingsFilter
             categories={categories}
-            initialFilters={searchParams}
+            initialFilters={params}
           />
         </div>
 
@@ -128,7 +129,7 @@ async function ListingsContent({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {listings.map((listing) => (
-        <ListingCard key={listing.id} listing={listing} />
+        <ListingCard key={listing.id} listing={listing as any} />
       ))}
     </div>
   );

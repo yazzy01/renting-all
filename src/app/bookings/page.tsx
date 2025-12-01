@@ -14,7 +14,7 @@ export const metadata = {
 export default async function BookingsPage({
   searchParams,
 }: {
-  searchParams: { tab?: string };
+  searchParams: Promise<{ tab?: string }>;
 }) {
   const session = await getServerSession(authOptions);
   
@@ -23,7 +23,8 @@ export default async function BookingsPage({
   }
 
   const userId = session.user.id as string;
-  const activeTab = searchParams.tab || "bookings"; // Default to "bookings" tab
+  const params = await searchParams;
+  const activeTab = params.tab || "bookings"; // Default to "bookings" tab
 
   // Fetch user bookings (items they're renting)
   const bookings = await db.booking.findMany({

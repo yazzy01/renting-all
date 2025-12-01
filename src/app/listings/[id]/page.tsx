@@ -8,14 +8,15 @@ import ListingGallery from "@/components/listings/ListingGallery";
 import ListingReviews from "@/components/listings/ListingReviews";
 
 interface ListingDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: ListingDetailPageProps) {
+  const resolvedParams = await params;
   const listing = await db.listing.findUnique({
-    where: { id: params.id },
+    where: { id: resolvedParams.id },
   });
 
   if (!listing) {
@@ -34,8 +35,9 @@ export async function generateMetadata({ params }: ListingDetailPageProps) {
 export default async function ListingDetailPage({
   params,
 }: ListingDetailPageProps) {
+  const resolvedParams = await params;
   const listing = await db.listing.findUnique({
-    where: { id: params.id },
+    where: { id: resolvedParams.id },
     include: {
       owner: true,
       category: true,
