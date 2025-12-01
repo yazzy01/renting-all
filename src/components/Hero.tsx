@@ -3,42 +3,93 @@ import Image from 'next/image'
 
 const Hero = () => {
   return (
-    <div className="relative bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-          <svg className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-            <polygon points="50,0 100,0 50,100 0,100" />
-          </svg>
-
-          <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-            <div className="sm:text-center lg:text-left">
-              <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                <span className="block">Rent Anything,</span>
-                <span className="block text-primary">Anytime</span>
+    <div className="relative bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div className="text-center lg:text-left space-y-8">
+            <div className="space-y-4">
+              <div className="inline-block">
+                <span className="bg-green-100 text-green-800 text-sm font-semibold px-4 py-2 rounded-full">
+                  🚀 Launching Soon
+                </span>
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold">
+                <span className="block text-gray-900">Rent Anything,</span>
+                <span className="block bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                  Anytime
+                </span>
               </h1>
-              <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                From Bikes to Cars, Directly from Owners. Visionary Early-Stage Startup. Built with community feedback and powered by your insights.
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0">
+                From bikes to cars, connect directly with owners. Join the future of peer-to-peer vehicle rentals.
               </p>
-              <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                <div className="rounded-md shadow">
-                  <Link href="/auth/register" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-dark md:py-4 md:text-lg md:px-10">
-                    Join as an Early Adopter
-                  </Link>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Link 
+                href="/auth/register" 
+                className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl hover:from-green-700 hover:to-emerald-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                Get Started Free
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+              <Link 
+                href="/listings" 
+                className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-green-700 bg-white border-2 border-green-200 rounded-xl hover:border-green-400 hover:bg-green-50 transform hover:scale-105 transition-all duration-200 shadow-md"
+              >
+                Browse Vehicles
+              </Link>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 pt-8">
+              <div className="text-center lg:text-left">
+                <div className="text-3xl font-bold text-green-600">500+</div>
+                <div className="text-sm text-gray-600">Vehicles</div>
+              </div>
+              <div className="text-center lg:text-left">
+                <div className="text-3xl font-bold text-green-600">50+</div>
+                <div className="text-sm text-gray-600">Cities</div>
+              </div>
+              <div className="text-center lg:text-left">
+                <div className="text-3xl font-bold text-green-600">1K+</div>
+                <div className="text-sm text-gray-600">Happy Users</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Image */}
+          <div className="relative">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
+              <Image
+                src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=600&fit=crop"
+                alt="Modern car rental"
+                width={800}
+                height={600}
+                className="w-full h-auto"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-green-900/20 to-transparent"></div>
+            </div>
+            
+            {/* Floating Card */}
+            <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-6 hidden md:block">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
                 </div>
-                <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <Link href="/listings" className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
-                    Browse Vehicles
-                  </Link>
+                <div>
+                  <div className="font-semibold text-gray-900">Verified Owners</div>
+                  <div className="text-sm text-gray-600">100% Safe & Secure</div>
                 </div>
               </div>
             </div>
-          </main>
-        </div>
-      </div>
-      <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-        <div className="h-56 w-full bg-gray-300 sm:h-72 md:h-96 lg:w-full lg:h-full relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-opacity-90 text-xl">
-            Vehicle Rental Image Placeholder
           </div>
         </div>
       </div>
