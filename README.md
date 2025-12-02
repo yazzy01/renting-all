@@ -1,7 +1,5 @@
 # 🚗 RentingAll - Peer-to-Peer Vehicle Rental Platform
 
-![RentingAll](https://github.com/yazzy01/renting-all/blob/master/screenshot.png?raw=true)
-
 🚀 **Live Demo:** [https://renting-all.vercel.app/](https://renting-all.vercel.app/)
 
 From bikes to cars, connect directly with owners. Join the future of peer-to-peer vehicle rentals - convenient, affordable, and eco-friendly transportation solutions.
@@ -299,7 +297,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Yassir Rzigui**  
 Full Stack Developer & Sharing Economy Enthusiast
 
-- 🌐 Website: [Portfolio](https://yassir-rzigui.vercel.app)
+- 🌐 Website: [Portfolio](https://portfolio-yassir-blond.vercel.app)
 - 💼 LinkedIn: [Yassir Rzigui](https://linkedin.com/in/yassir-rzigui)
 - 📧 Email: rziguiyassir@gmail.com
 - 🐙 GitHub: [@yazzy01](https://github.com/yazzy01)
