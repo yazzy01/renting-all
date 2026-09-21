@@ -1,5 +1,7 @@
 # 🚗 RentingAll - Peer-to-Peer Vehicle Rental Platform
 
+[![CI](https://github.com/yazzy01/renting-all/actions/workflows/ci.yml/badge.svg)](https://github.com/yazzy01/renting-all/actions/workflows/ci.yml)
+
 🚀 **Live Demo:** [https://renting-all.vercel.app/](https://renting-all.vercel.app/)
 
 From bikes to cars, connect directly with owners. Join the future of peer-to-peer vehicle rentals - convenient, affordable, and eco-friendly transportation solutions.
